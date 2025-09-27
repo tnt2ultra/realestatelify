@@ -24,9 +24,9 @@ export const useApartmentsStore = defineStore('apartments', () => {
       city: 'Москва',
       condition: 'хорошее',
       images: [
-        'https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg',
-        'https://images.pexels.com/photos/1571463/pexels-photo-1571463.jpeg',
-        'https://images.pexels.com/photos/1454804/pexels-photo-1454804.jpeg'
+        'https://images.unsplash.com/photo-1754136362561-fd8b431c78e4?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTYzMjJ8&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1758748930781-c5f463a9c25e?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTYzNDZ8&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1756370382832-1c8fe9965d67?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTYzNTZ8&ixlib=rb-4.1.0&q=85'
       ],
       sellerId: '2',
       seller: {
@@ -56,9 +56,9 @@ export const useApartmentsStore = defineStore('apartments', () => {
       city: 'Москва',
       condition: 'новое',
       images: [
-        'https://images.pexels.com/photos/2467558/pexels-photo-2467558.jpeg',
-        'https://images.pexels.com/photos/1571453/pexels-photo-1571453.jpeg',
-        'https://images.pexels.com/photos/2251247/pexels-photo-2251247.jpeg'
+        'https://images.unsplash.com/photo-1756888008424-86ebdcb9d6a3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTYzODZ8&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1757288354960-0e9783136e4c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTYzOTZ8&ixlib=rb-4.1.0&q=85',
+        'https://images.unsplash.com/photo-1757583010761-ffc255a8868c?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTY0MDZ8&ixlib=rb-4.1.0&q=85'
       ],
       sellerId: '3',
       seller: {

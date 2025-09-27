@@ -1,10 +1,13 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
+import './style.css'
 
 import App from './App.vue'
 import HomePage from './pages/HomePage.vue'
@@ -27,6 +30,8 @@ const router = createRouter({
 })
 
 const vuetify = createVuetify({
+  components,
+  directives,
   icons: {
     defaultSet: 'mdi',
     aliases,

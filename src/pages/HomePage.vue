@@ -1,13 +1,16 @@
 <template>
   <div class="home-page">
     <!-- Hero Section -->
-    <section class="hero">
-      <v-container>
-        <v-row align="center" justify="center" class="min-height-screen">
-          <v-col cols="12" md="6" class="text-center text-md-left">
+    <section class="hero-section">
+      <v-container class="fill-height">
+        <v-row align="center" justify="center" class="text-center">
+          <v-col cols="12" md="10" lg="8">
             <v-fade-transition appear>
               <div>
-                <h1 class="display-1 font-weight-bold text-white mb-4">
+                <h1
+                  class="text-h3 text-md-h2 font-weight-bold text-white mb-4"
+                  style="text-shadow: 2px 2px 8px rgba(0,0,0,0.5);"
+                >
                   Продавайте и покупайте недвижимость
                   <span class="text-accent">с помощью ИИ</span>
                 </h1>
@@ -15,7 +18,7 @@
                   Быстрая и точная оценка квартир с использованием искусственного интеллекта. 
                   Найдите идеальную недвижимость или продайте по лучшей цене.
                 </p>
-                <div class="d-flex flex-column flex-sm-row gap-4">
+                <div class="d-flex flex-column flex-sm-row justify-center gap-4 mt-8">
                   <v-btn
                     color="accent"
                     size="x-large"
@@ -39,23 +42,42 @@
               </div>
             </v-fade-transition>
           </v-col>
-          <v-col cols="12" md="6" class="text-center">
-            <v-slide-x-transition appear>
-              <v-img
-                src="https://images.pexels.com/photos/280221/pexels-photo-280221.jpeg"
-                alt="Modern apartment"
-                class="rounded-lg elevation-12"
-                height="400"
-                cover
-              />
-            </v-slide-x-transition>
-          </v-col>
         </v-row>
       </v-container>
     </section>
 
+    <!-- Recent Listings Section -->
+    <section class="py-12 bg-surface">
+      <v-container>
+        <div class="text-center mb-10">
+          <h2 class="text-h4 font-weight-bold text-primary mb-2">
+            Новые объявления на рынке
+          </h2>
+          <p class="text-body-1 text-medium-emphasis">
+            Ознакомьтесь с последними предложениями от наших продавцов
+          </p>
+        </div>
+        <v-row>
+          <v-col
+            v-for="apartment in recentApartments"
+            :key="apartment.id"
+            cols="12"
+            md="6"
+            lg="4"
+          >
+            <ApartmentCard :apartment="apartment" />
+          </v-col>
+        </v-row>
+        <div class="text-center mt-8">
+          <v-btn size="large" variant="outlined" color="primary" to="/listings">
+            Смотреть все объявления
+          </v-btn>
+        </div>
+      </v-container>
+    </section>
+
     <!-- Features Section -->
-    <section class="py-16">
+    <section class="py-16 bg-gradient">
       <v-container>
         <div class="text-center mb-12">
           <h2 class="text-h3 font-weight-bold text-white mb-4">
@@ -74,10 +96,11 @@
             md="4"
             class="mb-4"
           >
-            <v-slide-y-transition appear :delay="index * 200">
+            <v-slide-y-transition appear :delay="index * 150">
               <v-card
                 class="feature-card h-100"
-                color="surface"
+                color="rgba(255, 255, 255, 0.1)"
+                variant="outlined"
                 elevation="8"
               >
                 <v-card-text class="text-center pa-8">
@@ -85,10 +108,11 @@
                     color="primary"
                     size="80"
                     class="mb-4"
+                    variant="tonal"
                   >
                     <v-icon color="white" size="40">{{ feature.icon }}</v-icon>
                   </v-avatar>
-                  <h3 class="text-h5 font-weight-bold mb-3">{{ feature.title }}</h3>
+                  <h3 class="text-h5 font-weight-bold text-white mb-3">{{ feature.title }}</h3>
                   <p class="text-body-1 text-medium-emphasis">{{ feature.description }}</p>
                 </v-card-text>
               </v-card>
@@ -99,7 +123,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16">
+    <section class="py-16 bg-surface">
       <v-container>
         <v-row>
           <v-col
@@ -111,8 +135,8 @@
           >
             <v-slide-y-transition appear :delay="index * 150">
               <div>
-                <h3 class="text-h3 font-weight-bold text-accent mb-2">{{ stat.value }}</h3>
-                <p class="text-h6 text-white">{{ stat.label }}</p>
+                <h3 class="text-h3 font-weight-bold text-primary mb-2">{{ stat.value }}</h3>
+                <p class="text-h6 text-medium-emphasis">{{ stat.label }}</p>
               </div>
             </v-slide-y-transition>
           </v-col>
@@ -120,11 +144,12 @@
       </v-container>
     </section>
 
-    <!-- CTA Section -->
-    <section class="py-16">
+    <!-- Final CTA Section -->
+    <section class="py-16 bg-gradient">
       <v-container>
         <v-card
-          color="white"
+          color="rgba(255, 255, 255, 0.1)"
+          variant="outlined"
           elevation="12"
           class="text-center pa-8"
         >
@@ -132,20 +157,21 @@
             Готовы начать?
           </h2>
           <p class="text-h6 text-medium-emphasis mb-6">
-            Присоединяйтесь к тысячам пользователей, которые уже используют наш сервис
+            Присоединяйтесь к тысячам пользователей, которые доверяют нашей платформе
           </p>
           <div class="d-flex flex-column flex-sm-row justify-center gap-4">
             <v-btn
-              color="primary"
+              color="accent"
               size="x-large"
               variant="flat"
               prepend-icon="mdi-account-plus"
               @click="$router.push('/login')"
+              class="text-white"
             >
               Зарегистрироваться
             </v-btn>
             <v-btn
-              color="primary"
+              color="white"
               size="x-large"
               variant="outlined"
               prepend-icon="mdi-information"
@@ -160,6 +186,12 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useApartmentsStore } from '../stores/apartments'
+import ApartmentCard from '../components/ApartmentCard.vue'
+
+const apartmentsStore = useApartmentsStore()
+
 const features = [
   {
     icon: 'mdi-brain',
@@ -184,32 +216,40 @@ const stats = [
   { value: '24/7', label: 'Поддержка' },
   { value: '±5%', label: 'Точность оценки' }
 ]
+
+const recentApartments = computed(() => apartmentsStore.apartments.slice(0, 3))
 </script>
 
 <style scoped>
-.home-page {
-  min-height: 100vh;
-}
-
-.hero {
+.hero-section {
   min-height: 100vh;
   display: flex;
   align-items: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+    url('https://images.unsplash.com/photo-1758513305697-8be64c4817a5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTg1NjZ8&ixlib=rb-4.1.0&q=85') no-repeat center center;
+  background-size: cover;
 }
 
-.min-height-screen {
-  min-height: 100vh;
+.bg-gradient {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
 .feature-card {
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .feature-card:hover {
   transform: translateY(-8px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2) !important;
 }
 
 .gap-4 {
   gap: 1rem;
+}
+
+.opacity-90 {
+  opacity: 0.9;
 }
 </style>

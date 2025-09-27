@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
+import { useToast } from 'vue-toastification'
 import type { Apartment, ValuationRequest, ValuationResult } from '../types'
 
 /**
@@ -8,6 +9,8 @@ import type { Apartment, ValuationRequest, ValuationResult } from '../types'
  */
 export const useApartmentsStore = defineStore('apartments', () => {
   // Реактивный массив всех квартир
+  const toast = useToast()
+
   const apartments = ref<Apartment[]>([
     {
       id: '1',
@@ -85,26 +88,32 @@ export const useApartmentsStore = defineStore('apartments', () => {
    */
   const addApartment = async (apartment: Omit<Apartment, 'id' | 'createdAt' | 'updatedAt'>) => {
     // Валидация обязательных полей
+    const validationError = (field: string, message: string) => {
+      const error = new Error(message)
+      toast.error(message)
+      throw error
+    }
+
     if (!apartment.title || apartment.title.trim().length < 5) {
-      throw new Error('Заголовок должен содержать минимум 5 символов')
+      validationError('title', 'Заголовок должен содержать минимум 5 символов')
     }
-    
+
     if (!apartment.description || apartment.description.trim().length < 20) {
-      throw new Error('Описание должно содержать минимум 20 символов')
+      validationError('description', 'Описание должно содержать минимум 20 символов')
     }
-    
+
     if (!apartment.price || apartment.price <= 0) {
-      throw new Error('Цена должна быть больше 0')
+      validationError('price', 'Цена должна быть больше 0')
     }
-    
+
     if (!apartment.area || apartment.area <= 0) {
-      throw new Error('Площадь должна быть больше 0')
+      validationError('area', 'Площадь должна быть больше 0')
     }
-    
+
     if (!apartment.address || apartment.address.trim().length < 5) {
-      throw new Error('Адрес должен содержать минимум 5 символов')
+      validationError('address', 'Адрес должен содержать минимум 5 символов')
     }
-    
+
     // Создание нового объявления с уникальным ID и временными метками
     const newApartment: Apartment = {
       ...apartment,

@@ -176,5 +176,10 @@ const apartments = computed(() => {
 <style scoped>
 .listing-page {
   min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1758240689297-d8613ca753f3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTkwMDgwMTZ8&ixlib=rb-4.1.0&q=85')
+      no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 </style>

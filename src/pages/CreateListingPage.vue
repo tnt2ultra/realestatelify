@@ -246,14 +246,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, reactive, watch, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useToast } from "vue-toastification";
 import { useUserStore } from '../stores/user'
 import { useApartmentsStore } from '../stores/apartments'
+import type { Apartment } from '../types'
 
 const router = useRouter()
 const route = useRoute()
 const userStore = useUserStore()
+const toast = useToast();
 const apartmentsStore = useApartmentsStore()
 
 // Реактивные переменные состояния
@@ -274,7 +277,7 @@ const formData = reactive({
   address: '',
   district: '',
   city: 'Москва',
-  condition: '',
+  condition: '' as Apartment['condition'],
   features: [] as string[],
   images: [] as string[]
 })
@@ -368,6 +371,7 @@ const handleSubmit = async () => {
 
   // Проверка аутентификации
   if (!userStore.isAuthenticated || !userStore.user) {
+    toast.error('Вы должны быть авторизованы для создания объявления.');
     router.push('/login')
     return
   }
@@ -381,12 +385,14 @@ const handleSubmit = async () => {
       sellerId: userStore.user.id,
       seller: userStore.user
     })
-    
+
+    toast.success('Объявление успешно создано!');
     // Перенаправление на страницу объявлений после успешного создания
     router.push('/listings')
-  } catch (error) {
-    console.error('Ошибка создания объявления:', error)
-    // В реальном приложении здесь должно быть отображение ошибки пользователю
+  } catch (error: any) {
+    // Ошибки валидации теперь обрабатываются в сторе.
+    // Здесь могут быть другие ошибки, например, сетевые.
+    console.error('Ошибка создания объявления:', error.message)
   } finally {
     loading.value = false
   }
@@ -396,6 +402,10 @@ const handleSubmit = async () => {
 <style scoped>
 .create-listing-page {
   min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://images.unsplash.com/photo-1616046229478-9901c5536a45?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')
+      no-repeat center center;
+  background-size: cover;
 }
 
 .gap-2 {

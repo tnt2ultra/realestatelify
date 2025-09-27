@@ -47,13 +47,13 @@
     </section>
 
     <!-- Recent Listings Section -->
-    <section class="py-12 bg-surface">
+    <section class="py-12 recent-listings-section">
       <v-container>
         <div class="text-center mb-10">
-          <h2 class="text-h4 font-weight-bold text-primary mb-2">
+          <h2 class="text-h4 font-weight-bold text-white mb-2">
             Новые объявления на рынке
           </h2>
-          <p class="text-body-1 text-medium-emphasis">
+          <p class="text-body-1 text-white opacity-90">
             Ознакомьтесь с последними предложениями от наших продавцов
           </p>
         </div>
@@ -69,7 +69,7 @@
           </v-col>
         </v-row>
         <div class="text-center mt-8">
-          <v-btn size="large" variant="outlined" color="primary" to="/listings">
+          <v-btn size="large" variant="outlined" color="white" to="/listings">
             Смотреть все объявления
           </v-btn>
         </div>
@@ -123,7 +123,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="py-16 bg-surface">
+    <section class="py-16 stats-section">
       <v-container>
         <v-row>
           <v-col
@@ -135,8 +135,8 @@
           >
             <v-slide-y-transition appear :delay="index * 150">
               <div>
-                <h3 class="text-h3 font-weight-bold text-primary mb-2">{{ stat.value }}</h3>
-                <p class="text-h6 text-medium-emphasis">{{ stat.label }}</p>
+                <h3 class="text-h3 font-weight-bold text-white mb-2">{{ stat.value }}</h3>
+                <p class="text-h6 text-white opacity-90">{{ stat.label }}</p>
               </div>
             </v-slide-y-transition>
           </v-col>
@@ -153,7 +153,7 @@
           elevation="12"
           class="text-center pa-8"
         >
-          <h2 class="text-h4 font-weight-bold mb-4">
+          <h2 class="text-h4 font-weight-bold text-white mb-4">
             Готовы начать?
           </h2>
           <p class="text-h6 text-medium-emphasis mb-6">
@@ -226,8 +226,22 @@ const recentApartments = computed(() => apartmentsStore.apartments.slice(0, 3))
   display: flex;
   align-items: center;
   background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
-    url('https://images.unsplash.com/photo-1758513305697-8be64c4817a5?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTg5OTg1NjZ8&ixlib=rb-4.1.0&q=85') no-repeat center center;
+    url('https://images.unsplash.com/photo-1757532128043-5f52ebb172db?crop=entropy&cs=srgb&fm=jpg&ixid=M3w2MDcyNjN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NTkwMDgxMTN8&ixlib=rb-4.1.0&q=85') no-repeat center center;
   background-size: cover;
+}
+
+.recent-listings-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url('https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.stats-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .bg-gradient {

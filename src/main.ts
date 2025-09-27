@@ -1,12 +1,12 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createRouter, createWebHistory } from 'vue-router'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
 import { createVuetify } from 'vuetify'
 import { aliases, mdi } from 'vuetify/iconsets/mdi'
 import 'vuetify/styles'
 import '@mdi/font/css/materialdesignicons.css'
+import Toast, { POSITION, type PluginOptions } from "vue-toastification";
+import "vue-toastification/dist/index.css";
 import './style.css'
 
 import App from './App.vue'
@@ -30,12 +30,10 @@ const router = createRouter({
 })
 
 const vuetify = createVuetify({
-  components,
-  directives,
   icons: {
     defaultSet: 'mdi',
     aliases,
-    sets: { mdi }
+    sets: { mdi },
   },
   theme: {
     defaultTheme: 'light',
@@ -59,8 +57,24 @@ const vuetify = createVuetify({
 
 const pinia = createPinia()
 
+const toastOptions: PluginOptions = {
+  position: POSITION.TOP_RIGHT,
+  timeout: 5000,
+  closeOnClick: true,
+  pauseOnFocusLoss: true,
+  pauseOnHover: true,
+  draggable: true,
+  draggablePercent: 0.6,
+  showCloseButtonOnHover: false,
+  hideProgressBar: false,
+  closeButton: "button",
+  icon: true,
+  rtl: false
+};
+
 createApp(App)
   .use(router)
   .use(vuetify)
   .use(pinia)
+  .use(Toast, toastOptions)
   .mount('#app')

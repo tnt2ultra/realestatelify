@@ -10,4 +10,7 @@ export default defineConfig({
       autoImport: true,
     }),
   ],
+  optimizeDeps: {
+    include: ['vue-toastification'],
+  },
 })

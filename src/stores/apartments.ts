@@ -88,30 +88,30 @@ export const useApartmentsStore = defineStore('apartments', () => {
    */
   const addApartment = async (apartment: Omit<Apartment, 'id' | 'createdAt' | 'updatedAt'>) => {
     // Валидация обязательных полей
-    const validationError = (field: string, message: string) => {
+    const validationError = (message: string) => {
       const error = new Error(message)
       toast.error(message)
       throw error
     }
 
     if (!apartment.title || apartment.title.trim().length < 5) {
-      validationError('title', 'Заголовок должен содержать минимум 5 символов')
+      validationError('Заголовок должен содержать минимум 5 символов')
     }
 
     if (!apartment.description || apartment.description.trim().length < 20) {
-      validationError('description', 'Описание должно содержать минимум 20 символов')
+      validationError('Описание должно содержать минимум 20 символов')
     }
 
     if (!apartment.price || apartment.price <= 0) {
-      validationError('price', 'Цена должна быть больше 0')
+      validationError('Цена должна быть больше 0')
     }
 
     if (!apartment.area || apartment.area <= 0) {
-      validationError('area', 'Площадь должна быть больше 0')
+      validationError('Площадь должна быть больше 0')
     }
 
     if (!apartment.address || apartment.address.trim().length < 5) {
-      validationError('address', 'Адрес должен содержать минимум 5 символов')
+      validationError('Адрес должен содержать минимум 5 символов')
     }
 
     // Создание нового объявления с уникальным ID и временными метками
@@ -224,17 +224,16 @@ export const useApartmentsStore = defineStore('apartments', () => {
         condition: Math.round(conditionMultipliers[request.condition] * 100) || 100,
         floor: Math.round(floorMultiplier * 100)
       },
-      marketTrends: generateMarketTrends(request.district, estimatedPrice)
+      marketTrends: generateMarketTrends(request.district)
     }
   }
 
   /**
    * Генерация анализа рыночных трендов на основе района и цены
    * @param {string} district - Район
-   * @param {number} price - Оценочная стоимость
    * @returns {string} Текст анализа рынка
    */
-  const generateMarketTrends = (district: string, price: number): string => {
+  const generateMarketTrends = (district: string): string => {
     const trends = [
       'Стабильный рост цен на недвижимость в данном районе. Спрос превышает предложение.',
       'Активный рынок с высокой ликвидностью. Квартиры продаются в среднем за 2-3 месяца.',
